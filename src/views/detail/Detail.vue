@@ -14,6 +14,7 @@
   </scroll>
       <back-top @click.native="tabTop" v-show="isShowBackTop" ></back-top>
       <detail-shop-car @cartClick='cartClick'></detail-shop-car>  
+      <!-- <toast :message='message' :show='show'></toast> -->
   </div>
 </template>
 
@@ -31,6 +32,8 @@ import {getDetail,Goods,Shop,GoodsParams,GoodsRate,getRecommend} from 'network/d
 import Scroll from 'components/common/scroll/Scroll.vue'
 import {debounce} from 'common/utils/utils.js'
 import {backTopMixins} from 'common/mixin'
+import {mapActions} from 'vuex'
+// import Toast from 'components/common/toast/Toast.vue'
 
 export default {
   name:'Detail',
@@ -46,7 +49,9 @@ export default {
          recommendList:[],
          itemImgListenter:null,
          scrollContent:[0],
-         currentIndex:0
+         currentIndex:0,
+        //  message:'',
+        //  show:false
         }
     },
     components:{
@@ -60,8 +65,10 @@ export default {
         DetailRecommend,
         Scroll,
         DetailShopCar,
+        // Toast 
     },
-     created() {  
+
+            created() {  
        this.iid=this.$route.params.iid
        console.log(this.iid);
         getDetail(this.iid).then(res=>{
@@ -93,6 +100,7 @@ export default {
      },
       mixins:[backTopMixins],
      methods: {
+       ...mapActions(['addCart']),
        imageLoad(){
         this.$refs.scroll.refresh()
         this.scrollContent.push(this.$refs.goodsParams.$el.offsetTop);
@@ -116,6 +124,7 @@ export default {
        tabNavBar(index){
        this.$refs.scroll.scrollToUp(0,-this.scrollContent[index],200)
        },
+      //  将商品添加到vuex
        cartClick(){
         const product={
           image:this.detailSwiper[0],
@@ -124,7 +133,13 @@ export default {
           iid:this.iid,
           title:this.goods.title
         }
-       this.$store.commit('addCart',product)
+       this.addCart(product).then(res=>{
+         console.log(res);
+        //  this.show=true
+        //  this.message=res
+        this.$toast.show(res,1500)
+       })
+
        }
        
      },

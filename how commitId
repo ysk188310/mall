@@ -1,0 +1,636 @@
+[33mcommit a4335fcae0476c092ea8ba0b80cdfaeabe5fced1[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m)[m
+Author: 小康 <879844575@qq.com>
+Date:   Tue Sep 21 20:43:18 2021 +0800
+
+    完成首页和详情页
+
+[1mdiff --git a/package-lock.json b/package-lock.json[m
+[1mindex e1a0577..3f5f757 100644[m
+[1m--- a/package-lock.json[m
+[1m+++ b/package-lock.json[m
+[36m@@ -2269,6 +2269,14 @@[m
+       "integrity": "sha512-xh1Rl34h6Fi1DC2WWKfxUTVqRsNnr6LsKz2+hfwDxQJWmrx8+c7ylaqBMcHfl1U1r2dsifOvKX3LQuLNZ+XSvA==",[m
+       "dev": true[m
+     },[m
+[32m+[m[32m    "axios": {[m
+[32m+[m[32m      "version": "0.21.4",[m
+[32m+[m[32m      "resolved": "https://registry.npmjs.org/axios/-/axios-0.21.4.tgz",[m
+[32m+[m[32m      "integrity": "sha512-ut5vewkiu8jjGBdqpM44XxjuCjq9LAKeHVmoVfHVzy8eHgxxq8SbAVQNovDA8mVi05kP0Ea/n/UzcSHcTJQfNg==",[m
+[32m+[m[32m      "requires": {[m
+[32m+[m[32m        "follow-redirects": "^1.14.0"[m
+[32m+[m[32m      }[m
+[32m+[m[32m    },[m
+     "babel-loader": {[m
+       "version": "8.2.2",[m
+       "resolved": "https://registry.npmjs.org/babel-loader/-/babel-loader-8.2.2.tgz",[m
+[36m@@ -2320,6 +2328,27 @@[m
+         "@babel/helper-define-polyfill-provider": "^0.2.2"[m
+       }[m
+     },[m
+[32m+[m[32m    "babel-runtime": {[m
+[32m+[m[32m      "version": "6.26.0",[m
+[32m+[m[32m      "resolved": "https://registry.npmjs.org/babel-runtime/-/babel-runtime-6.26.0.tgz",[m
+[32m+[m[32m      "integrity": "sha1-llxwWGaOgrVde/4E/yM3vItWR/4=",[m
+[32m+[m[32m      "requires": {[m
+[32m+[m[32m        "core-js": "^2.4.0",[m
+[32m+[m[32m        "regenerator-runtime": "^0.11.0"[m
+[32m+[m[32m      },[m
+[32m+[m[32m      "dependencies": {[m
+[32m+[m[32m        "core-js": {[m
+[32m+[m[32m          "version": "2.6.12",[m
+[32m+[m[32m          "resolved": "https://registry.npmjs.org/core-js/-/core-js-2.6.12.tgz",[m
+[32m+[m[32m          "integrity": "sha512-Kb2wC0fvsWfQrgk8HU5lW6U/Lcs8+9aaYcy4ZFc6DDlo4nZ7n70dEgE5rtR0oG6ufKDUnrwfWL1mXR5ljDatrQ=="[m
+[32m+[m[32m        },[m
+[32m+[m[32m        "regenerator-runtime": {[m
+[32m+[m[32m          "version": "0.11.1",[m
+[32m+[m[32m          "resolved": "https://registry.npmjs.org/regenerator-runtime/-/regenerator-runtime-0.11.1.tgz",[m
+[32m+[m[32m          "integrity": "sha512-MguG95oij0fC3QV3URf4V2SDYGJhJnJGqvIIgdECeODCT98wSWDAJ94SSuVpYQUoTcGUIL6L4yNB7j1DFFHSBg=="[m
+[32m+[m[32m        }[m
+[32m+[m[32m      }[m
+[32m+[m[32m    },[m
+     "balanced-match": {[m
+       "version": "1.0.2",[m
+       "resolved": "https://registry.npmjs.org/balanced-match/-/balanced-match-1.0.2.tgz",[m
+[36m@@ -2402,6 +2431,14 @@[m
+         "tweetnacl": "^0.14.3"[m
+       }[m
+     },[m
+[32m+[m[32m    "better-scroll": {[m
+[32m+[m[32m      "version": "1.13.2",[m
+[32m+[m[32m      "resolved": "https://registry.npmjs.org/better-scroll/-/better-scroll-1.13.2.tgz",[m
+[32m+[m[32m      "integrity": "sha512-JUt5aQYuHMjHNOD5JpIvNT502MlHAPXZsHoA6P2rNgLKX6WPQIoHhpwo0gT9FHgm9uTJ8wEg1HN9ZmRFJYjZLg==",[m
+[32m+[m[32m      "requires": {[m
+[32m+[m[32m        "babel-runtime": "^6.0.0"[m
+[32m+[m[32m      }[m
+[32m+[m[32m    },[m
+     "bfj": {[m
+       "version": "6.1.2",[m
+       "resolved": "https://registry.npmjs.org/bfj/-/bfj-6.1.2.tgz",[m
+[36m@@ -5018,8 +5055,7 @@[m
+     "follow-redirects": {[m
+       "version": "1.14.3",[m
+       "resolved": "https://registry.npmjs.org/follow-redirects/-/follow-redirects-1.14.3.tgz",[m
+[31m-      "integrity": "sha512-3MkHxknWMUtb23apkgz/83fDoe+y+qr0TdgacGIA7bew+QLBo3vdgEN2xEsuXNivpFy4CyDhBBZnNZOtalmenw==",[m
+[31m-      "dev": true[m
+[32m+[m[32m      "integrity": "sha512-3MkHxknWMUtb23apkgz/83fDoe+y+qr0TdgacGIA7bew+QLBo3vdgEN2xEsuXNivpFy4CyDhBBZnNZOtalmenw=="[m
+     },[m
+     "for-in": {[m
+       "version": "1.0.2",[m
+[36m@@ -10341,6 +10377,11 @@[m
+         }[m
+       }[m
+     },[m
+[32m+[m[32m    "vue-router": {[m
+[32m+[m[32m      "version": "3.5.2",[m
+[32m+[m[32m      "resolved": "https://registry.npmjs.org/vue-router/-/vue-router-3.5.2.tgz",[m
+[32m+[m[32m      "integrity": "sha512-807gn82hTnjCYGrnF3eNmIw/dk7/GE4B5h69BlyCK9KHASwSloD1Sjcn06zg9fVG4fYH2DrsNBZkpLtb25WtaQ=="[m
+[32m+[m[32m    },[m
+     "vue-style-loader": {[m
+       "version": "4.1.3",[m
+       "resolved": "https://registry.npmjs.org/vue-style-loader/-/vue-style-loader-4.1.3.tgz",[m
+[36m@@ -10375,6 +10416,11 @@[m
+       "integrity": "sha512-4gDntzrifFnCEvyoO8PqyJDmguXgVPxKiIxrBKjIowvL9l+N66196+72XVYR8BBf1Uv1Fgt3bGevJ+sEmxfZzw==",[m
+       "dev": true[m
+     },[m
+[32m+[m[32m    "vuex": {[m
+[32m+[m[32m      "version": "3.6.2",[m
+[32m+[m[32m      "resolved": "https://registry.npmjs.org/vuex/-/vuex-3.6.2.tgz",[m
+[32m+[m[32m      "integrity": "sha512-ETW44IqCgBpVomy520DT5jf8n0zoCac+sxWnn+hMe/CzaSejb/eVw2YToiXYX+Ex/AuHHia28vWTq4goAexFbw=="[m
+[32m+[m[32m    },[m
+     "watchpack": {[m
+       "version": "1.7.5",[m
+       "resolved": "https://registry.npmjs.org/watchpack/-/watchpack-1.7.5.tgz",[m
+[1mdiff --git a/package.json b/package.json[m
+[1mindex 437d9aa..4c3d0c6 100644[m
+[1m--- a/package.json[m
+[1m+++ b/package.json[m
+[36m@@ -7,8 +7,12 @@[m
+     "build": "vue-cli-service build"[m
+   },[m
+   "dependencies": {[m
+[32m+[m[32m    "axios": "^0.21.4",[m
+[32m+[m[32m    "better-scroll": "^1.13.2",[m
+     "core-js": "^3.6.5",[m
+[31m-    "vue": "^2.6.11"[m
+[32m+[m[32m    "vue": "^2.6.11",[m
+[32m+[m[32m    "vue-router": "^3.5.2",[m
+[32m+[m[32m    "vuex": "^3.6.2"[m
+   },[m
+   "devDependencies": {[m
+     "@vue/cli-plugin-babel": "~4.5.0",[m
+[1mdiff --git a/src/App.vue b/src/App.vue[m
+[1mindex 55df315..412e6de 100644[m
+[1m--- a/src/App.vue[m
+[1m+++ b/src/App.vue[m
+[36m@@ -1,28 +1,22 @@[m
+ <template>[m
+   <div id="app">[m
+[31m-    <img alt="Vue logo" src="./assets/logo.png">[m
+[31m-    <HelloWorld msg="Welcome to Your Vue.js App"/>[m
+[32m+[m[32m    <keep-alive exclude="Detail">[m
+[32m+[m[32m    <router-view></router-view>[m
+[32m+[m[32m    </keep-alive>[m
+[32m+[m[32m   <MainTabBar></MainTabBar>[m
+   </div>[m
+ </template>[m
+ [m
+ <script>[m
+[31m-import HelloWorld from './components/HelloWorld.vue'[m
+[31m-[m
+[32m+[m[32mimport MainTabBar from 'components/content/maintabbar/MainTabBar'[m
+ export default {[m
+   name: 'App',[m
+   components: {[m
+[31m-    HelloWorld[m
+[32m+[m[32m  MainTabBar[m
+   }[m
+ }[m
+ </script>[m
+ [m
+ <style>[m
+[31m-#app {[m
+[31m-  font-family: Avenir, Helvetica, Arial, sans-serif;[m
+[31m-  -webkit-font-smoothing: antialiased;[m
+[31m-  -moz-osx-font-smoothing: grayscale;[m
+[31m-  text-align: center;[m
+[31m-  color: #2c3e50;[m
+[31m-  margin-top: 60px;[m
+[31m-}[m
+[32m+[m[32m@import url('assets/css/base.css');[m
+ </style>[m
+[1mdiff --git a/src/assets/css/base.css b/src/assets/css/base.css[m
+[1mnew file mode 100644[m
+[1mindex 0000000..454e118[m
+[1m--- /dev/null[m
+[1m+++ b/src/assets/css/base.css[m
+[36m@@ -0,0 +1,57 @@[m
+[32m+[m[32m  @import "./normalize.css";[m
+[32m+[m
+[32m+[m[32m/*:root -> 获取根元素html*/[m
+[32m+[m[32m:root {[m
+[32m+[m[32m  --color-text: #666;[m
+[32m+[m[32m  --color-high-text: #ff5777;[m
+[32m+[m[32m  --color-tint: #ff8198;[m
+[32m+[m[32m  --color-background: #fff;[m
+[32m+[m[32m  --font-size: 14px;[m
+[32m+[m[32m  --line-height: 1.5;[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32m*,[m
+[32m+[m[32m*::before,[m
+[32m+[m[32m*::after {[m
+[32m+[m[32m  margin: 0;[m
+[32m+[m[32m  padding: 0;[m
+[32m+[m[32m  box-sizing: border-box;[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32mbody {[m
+[32m+[m[32m  font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;[m
+[32m+[m[32m  user-select: none; /* 禁止用户鼠标在页面上选中文字/图片等 */[m
+[32m+[m[32m  -webkit-tap-highlight-color: transparent; /* webkit是苹果浏览器引擎，tap点击，highlight背景高亮，color颜色，颜色用数值调节 */[m
+[32m+[m[32m  background: var(--color-background);[m
+[32m+[m[32m  color: var(--color-text);[m
+[32m+[m[32m  /* rem vw/vh */[m
+[32m+[m[32m  width: 100vw;[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32ma {[m
+[32m+[m[32m  color: var(--color-text);[m
+[32m+[m[32m  text-decoration: none;[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m
+[32m+[m[32m.clear-fix::after {[m
+[32m+[m[32m  clear: both;[m
+[32m+[m[32m  content: '';[m
+[32m+[m[32m  display: block;[m
+[32m+[m[32m  width: 0;[m
+[32m+[m[32m  height: 0;[m
+[32m+[m[32m  visibility: hidden;[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32m.clear-fix {[m
+[32m+[m[32m  zoom: 1;[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32m.left {[m
+[32m+[m[32m  float: left;[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32m.right {[m
+[32m+[m[32m  float: right;[m
+[32m+[m[32m}[m
+[32m+[m
+[1mdiff --git a/src/assets/css/normalize.css b/src/assets/css/normalize.css[m
+[1mnew file mode 100644[m
+[1mindex 0000000..47b010e[m
+[1m--- /dev/null[m
+[1m+++ b/src/assets/css/normalize.css[m
+[36m@@ -0,0 +1,341 @@[m
+[32m+[m[32m/*! normalize.css v8.0.0 | MIT License | github.com/necolas/normalize.css */[m
+[32m+[m
+[32m+[m[32m/* Document[m
+[32m+[m[32m   ========================================================================== */[m
+[32m+[m
+[32m+[m[32m/**[m
+[32m+[m[32m * 1. Correct the line height in all browsers.[m
+[32m+[m[32m * 2. Prevent adjustments of font size after orientation changes in iOS.[m
+[32m+[m[32m */[m
+[32m+[m
+[32m+[m[32mhtml {[m
+[32m+[m[32m  line-height: 1.15; /* 1 */[m
+[32m+[m[32m  -webkit-text-size-adjust: 100%; /* 2 */[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32m/* Sections[m
+[32m+[m[32m   ========================================================================== */[m
+[32m+[m
+[32m+[m[32m/**[m
+[32m+[m[32m * Remove the margin in all browsers.[m
+[32m+[m[32m */[m
+[32m+[m
+[32m+[m[32mbody {[m
+[32m+[m[32m  margin: 0;[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32m/**[m
+[32m+[m[32m * Correct the font size and margin on `h1` elements within `section` and[m
+[32m+[m[32m * `article` contexts in Chrome, Firefox, and Safari.[m
+[32m+[m[32m */[m
+[32m+[m
+[32m+[m[32mh1 {[m
+[32m+[m[32m  font-size: 2em;[m
+[32m+[m[32m  margin: 0.67em 0;[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32m/* Grouping content[m
+[32m+[m[32m   ========================================================================== */[m
+[32m+[m
+[32m+[m[32m/**[m
+[32m+[m[32m * 1. Add the correct box sizing in Firefox.[m
+[32m+[m[32m * 2. Show the overflow in Edge and IE.[m
+[32m+[m[32m */[m
+[32m+[m
+[32m+[m[32mhr {[m
+[32m+[m[32m  box-sizing: content-box; /* 1 */[m
+[32m+[m[32m  height: 0; /* 1 */[m
+[32m+[m[32m  overflow: visible; /* 2 */[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32m/**[m
+[32m+[m[32m * 1. Correct the inheritance and scaling of font size in all browsers.[m
+[32m+[m[32m * 2. Correct the odd `em` font sizing in all browsers.[m
+[32m+[m[32m */[m
+[32m+[m
+[32m+[m[32mpre {[m
+[32m+[m[32m  font-family: monospace, monospace; /* 1 */[m
+[32m+[m[32m  font-size: 1em; /* 2 */[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32m/* Text-level semantics[m
+[32m+[m[32m   ========================================================================== */[m
+[32m+[m
+[32m+[m[32m/**[m
+[32m+[m[32m * Remove the gray background on active links in IE 10.[m
+[32m+[m[32m */[m
+[32m+[m
+[32m+[m[32ma {[m
+[32m+[m[32m  background-color: transparent;[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32m/**[m
+[32m+[m[32m * 1. Remove the bottom border in Chrome 57-[m
+[32m+[m[32m * 2. Add the correct text decoration in Chrome, Edge, IE, Opera, and Safari.[m
+[32m+[m[32m */[m
+[32m+[m
+[32m+[m[32mabbr[title] {[m
+[32m+[m[32m  border-bottom: none; /* 1 */[m
+[32m+[m[32m  text-decoration: underline; /* 2 */[m
+[32m+[m[32m  text-decoration: underline dotted; /* 2 */[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32m/**[m
+[32m+[m[32m * Add the correct font weight in Chrome, Edge, and Safari.[m
+[32m+[m[32m */[m
+[32m+[m
+[32m+[m[32mb,[m
+[32m+[m[32mstrong {[m
+[32m+[m[32m  font-weight: bolder;[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32m/**[m
+[32m+[m[32m * 1. Correct the inheritance and scaling of font size in all browsers.[m
+[32m+[m[32m * 2. Correct the odd `em` font sizing in all browsers.[m
+[32m+[m[32m */[m
+[32m+[m
+[32m+[m[32mcode,[m
+[32m+[m[32mkbd,[m
+[32m+[m[32msamp {[m
+[32m+[m[32m  font-family: monospace, monospace; /* 1 */[m
+[32m+[m[32m  font-size: 1em; /* 2 */[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32m/**[m
+[32m+[m[32m * Add the correct font size in all browsers.[m
+[32m+[m[32m */[m
+[32m+[m
+[32m+[m[32msmall {[m
+[32m+[m[32m  font-size: 80%;[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32m/**[m
+[32m+[m[32m * Prevent `sub` and `sup` elements from affecting the line height in[m
+[32m+[m[32m * all browsers.[m
+[32m+[m[32m */[m
+[32m+[m
+[32m+[m[32msub,[m
+[32m+[m[32msup {[m
+[32m+[m[32m  font-size: 75%;[m
+[32m+[m[32m  line-height: 0;[m
+[32m+[m[32m  position: relative;[m
+[32m+[m[32m  vertical-align: baseline;[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32msub {[m
+[32m+[m[32m  bottom: -0.25em;[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32msup {[m
+[32m+[m[32m  top: -0.5em;[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32m/* Embedded content[m
+[32m+[m[32m   ========================================================================== */[m
+[32m+[m
+[32m+[m[32m/**[m
+[32m+[m[32m * Remove the border on images inside links in IE 10.[m
+[32m+[m[32m */[m
+[32m+[m
+[32m+[m[32mimg {[m
+[32m+[m[32m  border-style: none;[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32m/* Forms[m
+[32m+[m[32m   ========================================================================== */[m
+[32m+[m
+[32m+[m[32m/**[m
+[32m+[m[32m * 1. Change the font styles in all browsers.[m
+[32m+[m[32m * 2. Remove the margin in Firefox and Safari.[m
+[32m+[m[32m */[m
+[32m+[m
+[32m+[m[32mbutton,[m
+[32m+[m[32minput,[m
+[32m+[m[32moptgroup,[m
+[32m+[m[32mselect,[m
+[32m+[m[32mtextarea {[m
+[32m+[m[32m  font-family: inherit; /* 1 */[m
+[32m+[m[32m  font-size: 100%; /* 1 */[m
+[32m+[m[32m  line-height: 1.15; /* 1 */[m
+[32m+[m[32m  margin: 0; /* 2 */[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32m/**[m
+[32m+[m[32m * Show the overflow in IE.[m
+[32m+[m[32m * 1. Show the overflow in Edge.[m
+[32m+[m[32m */[m
+[32m+[m
+[32m+[m[32mbutton,[m
+[32m+[m[32minput { /* 1 */[m
+[32m+[m[32m  overflow: visible;[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32m/**[m
+[32m+[m[32m * Remove the inheritance of text transform in Edge, Firefox, and IE.[m
+[32m+[m[32m * 1. Remove the inheritance of text transform in Firefox.[m
+[32m+[m[32m */[m
+[32m+[m
+[32m+[m[32mbutton,[m
+[32m+[m[32mselect { /* 1 */[m
+[32m+[m[32m  text-transform: none;[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32m/**[m
+[32m+[m[32m * Correct the inability to style clickable types in iOS and Safari.[m
+[32m+[m[32m */[m
+[32m+[m
+[32m+[m[32mbutton,[m
+[32m+[m[32m[type="button"],[m
+[32m+[m[32m[type="reset"],[m
+[32m+[m[32m[type="submit"] {[m
+[32m+[m[32m  -webkit-appearance: button;[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32m/**[m
+[32m+[m[32m * Remove the inner border and padding in Firefox.[m
+[32m+[m[32m */[m
+[32m+[m
+[32m+[m[32mbutton::-moz-focus-inner,[m
+[32m+[m[32m[type="button"]::-moz-focus-inner,[m
+[32m+[m[32m[type="reset"]::-moz-focus-inner,[m
+[32m+[m[32m[type="submit"]::-moz-focus-inner {[m
+[32m+[m[32m  border-style: none;[m
+[32m+[m[32m  padding: 0;[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32m/**[m
+[32m+[m[32m * Restore the focus styles unset by the previous rule.[m
+[32m+[m[32m */[m
+[32m+[m
+[32m+[m[32mbutton:-moz-focusring,[m
+[32m+[m[32m[type="button"]:-moz-focusring,[m
+[32m+[m[32m[type="reset"]:-moz-focusring,[m
+[32m+[m[32m[type="submit"]:-moz-focusring {[m
+[32m+[m[32m  outline: 1px dotted ButtonText;[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32m/**[m
+[32m+[m[32m * Correct the padding in Firefox.[m
+[32m+[m[32m */[m
+[32m+[m
+[32m+[m[32mfieldset {[m
+[32m+[m[32m  padding: 0.35em 0.75em 0.625em;[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32m/**[m
+[32m+[m[32m * 1. Correct the text wrapping in Edge and IE.[m
+[32m+[m[32m * 2. Correct the color inheritance from `fieldset` elements in IE.[m
+[32m+[m[32m * 3. Remove the padding so developers are not caught out when they zero out[m
+[32m+[m[32m *    `fieldset` elements in all browsers.[m
+[32m+[m[32m */[m
+[32m+[m
+[32m+[m[32mlegend {[m
+[32m+[m[32m  box-sizing: border-box; /* 1 */[m
+[32m+[m[32m  color: inherit; /* 2 */[m
+[32m+[m[32m  display: table; /* 1 */[m
+[32m+[m[32m  max-width: 100%; /* 1 */[m
+[32m+[m[32m  padding: 0; /* 3 */[m
+[32m+[m[32m  white-space: normal; /* 1 */[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32m/**[m
+[32m+[m[32m * Add the correct vertical alignment in Chrome, Firefox, and Opera.[m
+[32m+[m[32m */[m
+[32m+[m
+[32m+[m[32mprogress {[m
+[32m+[m[32m  vertical-align: baseline;[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32m/**[m
+[32m+[m[32m * Remove the default vertical scrollbar in IE 10+.[m
+[32m+[m[32m */[m
+[32m+[m
+[32m+[m[32mtextarea {[m
+[32m+[m[32m  overflow: auto;[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32m/**[m
+[32m+[m[32m * 1. Add the correct box sizing in IE 10.[m
+[32m+[m[32m * 2. Remove the padding in IE 10.[m
+[32m+[m[32m */[m
+[32m+[m
+[32m+[m[32m[type="checkbox"],[m
+[32m+[m[32m[type="radio"] {[m
+[32m+[m[32m  box-sizing: border-box; /* 1 */[m
+[32m+[m[32m  padding: 0; /* 2 */[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32m/**[m
+[32m+[m[32m * Correct the cursor style of increment and decrement buttons in Chrome.[m
+[32m+[m[32m */[m
+[32m+[m
+[32m+[m[32m[type="number"]::-webkit-inner-spin-button,[m
+[32m+[m[32m[type="number"]::-webkit-outer-spin-button {[m
+[32m+[m[32m  height: auto;[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32m/**[m
+[32m+[m[32m * 1. Correct the odd appearance in Chrome and Safari.[m
+[32m+[m[32m * 2. Correct the outline style in Safari.[m
+[32m+[m[32m */[m
+[32m+[m
+[32m+[m[32m[type="search"] {[m
+[32m+[m[32m  -webkit-appearance: textfield; /* 1 */[m
+[32m+[m[32m  outline-offset: -2px; /* 2 */[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32m/**[m
+[32m+[m[32m * Remove the inner padding in Chrome and Safari on macOS.[m
+[32m+[m[32m */[m
+[32m+[m
+[32m+[m[32m[type="search"]::-webkit-search-decoration {[m
+[32m+[m[32m  -webkit-appearance: none;[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32m/**[m
+[32m+[m[32m * 1. Correct the inability to style clickable types in iOS and Safari.[m
+[32m+[m[32m * 2. Change font properties to `inherit` in Safari.[m
+[32m+[m[32m */[m
+[32m+[m
+[32m+[m[32m::-webkit-file-upload-button {[m
+[32m+[m[32m  -webkit-appearance: button; /* 1 */[m
+[32m+[m[32m  font: inherit; /* 2 */[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32m/* Interactive[m
+[32m+[m[32m   ========================================================================== */[m
+[32m+[m
+[32m+[m[32m/*[m
+[32m+[m[32m * Add the correct display in Edge, IE 10+, and Firefox.[m
+[32m+[m[32m */[m
+[32m+[m
+[32m+[m[32mdetails {[m
+[32m+[m[32m  display: block;[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32m/*[m
+[32m+[m[32m * Add the correct display in all browsers.[m
+[32m+[m[32m */[m
+[32m+[m
+[32m+[m[32msummary {[m
+[32m+[m[32m  display: list-item;[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32m/* Misc[m
+[32m+[m[32m   ========================================================================== */[m
+[32m+[m
+[32m+[m[32m/**[m
+[32m+[m[32m * Add the correct display in IE 10+.[m
+[32m+[m[32m */[m
+[32m+[m
+[32m+[m[32mtemplate {[m
+[32m+[m[32m  display: none;[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32m/**[m
+[32m+[m[32m * Add the correct display in IE 10.[m
+[32m+[m[32m */[m
+[32m+[m
+[32m+[m[32m[hidden] {[m
+[32m+[m[32m  display: none;[m
+[32m+[m[32m}[m
+[1mdiff --git a/src/assets/img/cart/tick.svg b/src/assets/img/cart/tick.svg[m
+[1mnew file mode 100644[m
+[1mindex 0000000..f8812a2[m
+[1m--- /dev/null[m
+[1m+++ b/src/assets/img/cart/tick.svg[m
+[36m@@ -0,0 +1 @@[m
+[32m+[m[32m<?xml version="1.0" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg class="icon" width="16px" height="16px" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"><path d="M908.288 127.488l-537.6 537.6-254.976-254.976L0 525.824l254.976 254.976 115.712 115.712L486.4 780.8l537.6-537.6z" fill="#ffffff" p-id="2923"/></svg>[m
+\ No newline at end of file[m
+[1mdiff --git a/src/assets/img/common/arrow-left.svg b/src/assets/img/common/arrow-left.svg[m
+[1mnew file mode 100644[m
+[1mindex 0000000..80358f8[m
+[1m--- /dev/null[m
+[1m+++ b/src/assets/img/common/arrow-left.svg[m
+[36m@@ -0,0 +1 @@[m
+[32m+[m[32m<?xml version="1.0" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg t="1543629945578" class="icon" style="" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="6057" xmlns:xlink="http://www.w3.org/1999/xlink" width="200" height="200"><defs><style type="text/css"></style></defs><path d="M325.048 93.511l-60.030 59.435 357.181 359.631-360.184 356.603 59.522 59.93 420.207-416.043z" p-id="6058" fill="#ffffff"></path></svg>[m
+\ No newline at end of file[m
+[1mdiff --git a/src/assets/img/common/back.svg b/src/assets/img/common/back.svg[m
+[1mnew file mode 100644[m
+[1mindex 0000000..b096286[m
+[1m--- /dev/null[m
+[1m+++ b/src/assets/img/common/back.svg[m
+[36m@@ -0,0 +1 @@[m
+[32m+[m[32m<?xml version="1.0" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg t="1540006086139" class="icon" style="" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1898" xmlns:xlink="http://www.w3.org/1999/xlink" width="22" height="22"><defs><style type="text/css"></style></defs><path d="M736 960a31.88 31.88 0 0 1-21.77-8.55l-448-416a32 32 0 0 1 0-46.9l448-416a32 32 0 1 1 43.55 46.9L335 512l422.77 392.55A32 32 0 0 1 736 960z" p-id="1899" fill="#515151"></path></svg>[m
+[1mdiff --git a/src/assets/img/common/collect.svg b/src/assets/img/common/collect.svg[m
+[1mnew file mode 100644[m
+[1mindex 0000000..7677c4f[m
+[1m--- /dev/null[m
+[1m+++ b/src/assets/img/common/collect.svg[m
+[36m@@ -0,0 +1 @@[m
+[32m+[m[32m<?xml version="1.0" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg class="icon" width="200px" height="200.00px" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"><path fill="#333333" d="M953.395454 402.915559c-8.676613-24.556279-30.668487-42.291199-57.407478-46.220694l-222.3716-32.523741L576.974315 126.46632c-11.676947-24.065092-37.161365-39.672558-64.992223-39.672558-27.721365 0-53.151547 15.606443-64.828494 39.617299l-96.643084 197.759039-222.589564 32.633235c-26.629497 3.928472-48.566112 21.609157-57.297984 46.27493-8.622378 24.938995-2.182712 51.950186 16.806781 70.613244l163.271574 160.433946-37.925774 222.535329c-4.638647 26.356274 6.65763 52.440349 29.631878 68.102051 12.059664 8.130168 26.303063 12.441357 41.200354 12.441357 12.059664 0 23.955598-2.891863 34.651194-8.458649l193.666838-102.917998 194.431248 103.192244c23.355941 12.059664 53.260018 10.423397 75.578326-4.311189 22.646789-15.497972 33.887808-41.582047 29.30442-67.940368l-37.871539-222.533282 163.381068-160.653957C955.577143 454.91998 961.962573 427.963025 953.395454 402.915559zM896.587634 432.873872 722.675722 603.894943c-6.712889 6.603395-9.713222 15.989159-8.131191 25.211195l40.381709 237.377362c0.709151 4.202719-1.200338 8.18645-5.02034 10.80509-4.637624 3.166109-12.659321 3.329838-17.080004 1.037632L525.352611 768.203126c-8.404414-4.474918-18.444071-4.365424-26.848485 0L291.576263 878.160447c-5.129834 2.620687-12.605086 2.346441-17.080004-0.709151-1.963725-1.308809-6.438643-5.074575-5.402033-11.076266l40.435944-237.377362c1.582031-9.224082-1.419326-18.609847-8.131191-25.213241L127.486044 432.873872c-3.110851-3.055592-4.201695-7.148817-2.892887-10.859325 1.582031-4.529153 6.056949-7.80271 11.67797-8.676613l237.431597-34.814923c9.331529-1.364067 17.407462-7.258311 21.554922-15.715937L498.558361 151.45955c2.182712-4.474918 7.584746-7.476275 13.423731-7.476275 5.948479 0 11.405771 3.001357 13.58746 7.53051l103.299691 211.292264c4.14746 8.458649 12.223393 14.351869 21.554922 15.715937l237.213633 34.706453c5.675256 0.87288 10.258645 4.201695 11.787464 8.512884C900.736117 425.726078 899.698484 429.818279 896.587634 432.873872z" /></svg>[m
+\ No newline at end of file[m
+[1mdiff --git a/src/assets/img/common/placeholder.png b/src/assets/img/common/placeholder.png[m
+[1mnew file mode 100644[m
+[1mindex 0000000..6df54a7[m
+Binary files /dev/null and b/src/assets/img/common/placeholder.png differ
+[1mdiff --git a/src/assets/img/common/top.png b/src/assets/img/common/top.png[m
+[1mnew file mode 100644[m
+[1mindex 0000000..c75bd73[m
+Binary files /dev/null and b/src/assets/img/common/top.png differ
+[1mdiff --git a/src/assets/img/detail/cart.png b/src/assets/img/detail/cart.png[m
+[1mnew file mode 100644[m
+[1mindex 0000000..fa8c9c7[m
+Binary files /dev/null and b/src/assets/img/detail/cart.png differ
+[1mdiff --git a/src/assets/img/detail/detail_bottom.png b/src/assets/img/detail/detail_bottom.png[m
+[1mnew file mode 100644[m
+[1mindex 0000000..a73cf6e[m
+Binary files /dev/null and b/src/assets/img/detail/detail_bottom.png differ
+[1mdiff --git a/src/assets/img/home/recommend_bg.jpg b/src/assets/img/home/recommend_bg.jpg[m
+[1mnew file mode 100644[m
+[1mindex 0000000..4533eb6[m
+Binary files /dev/null and b/src/assets/img/home/recommend_bg.jpg differ
+[1mdiff --git a/src/assets/img/profile/avatar.svg b/src/assets/img/profile/avatar.svg[m
+[1mnew file mode 100644[m
+[1mindex 0000000..f5c6300[m
+[1m--- /dev/null[m
+[1m+++ b/src/assets/img/profile/avatar.svg[m
+[36m@@ -0,0 +1 @@[m
+[32m+[m[32m<?xml version="1.0" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg t="1543629213633" class="icon" style="" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2702" xmlns:xlink="http://www.w3.org/1999/xlink" width="200" height="200"><defs><style type="text/css"></style></defs><path d="M510.919389 63.950498c247.345388 0 447.860191 200.514803 447.86019 447.861214 0 247.348458-200.514803 447.861214-447.86019 447.861214-247.348458 0-447.863261-200.51378-447.863261-447.861214 0-247.345388 200.514803-447.861214 447.863261-447.861214z" fill="#EEEEEE" p-id="2703"></path><path d="M510.919389 515.965312c79.150688 0 143.314033-64.425312 143.314033-143.899365 0-79.473029-64.163345-143.898341-143.314033-143.898341-79.151711 0-143.317103 64.425312-143.317103 143.898341-0.001023 79.475076 64.164369 143.899364 143.317103 143.899365z m221.060744 175.867449l1.068332-0.402159c-35.032888-88.682785-121.280204-151.399175-222.129076-151.399175-99.597369 0-184.944176 61.173245-220.793662 148.112316l0.494257 0.200568a35.121915 35.121915 0 0 0-2.565429 13.20065c0 19.475564 15.798824 35.266202 35.291784 35.266201 14.758122 0 27.392884-9.05626 32.661887-21.906939l0.575099 0.233314c25.224498-60.507072 84.822874-103.028515 154.336064-103.028515 70.109778 0 130.129756 43.259246 154.97256 104.59622l0.252757-0.095168c5.65479 11.939937 17.815761 20.201088 31.912827 20.201088 19.48989 0 35.289738-15.789615 35.289738-35.266201a35.281551 35.281551 0 0 0-1.367138-9.7122z" fill="#CCCCCC" p-id="2704"></path></svg>[m
+\ No newline at end of file[m
+[1mdiff --git a/src/assets/img/profile/cart.svg b/src/assets/img/profile/cart.svg[m
+[1mnew file mode 100644[m
+[1mindex 0000000..778dcb8[m
+[1m--- /dev/null[m
+[1m+++ b/src/assets/img/profile/cart.svg[m
+[36m@@ -0,0 +1 @@[m
+[32m+[m[32m<?xml version="1.0" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.

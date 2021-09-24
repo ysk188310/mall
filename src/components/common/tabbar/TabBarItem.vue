@@ -16,7 +16,7 @@ export default {
         path:String,//父传子
         activeColor:{
             type:String,
-            default:'blue'//默认颜色
+            default:'red'//默认颜色
 
         } 
     },

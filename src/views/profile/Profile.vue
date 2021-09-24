@@ -1,5 +1,6 @@
 <template>
    <div>
+        {{$store.state.cartList}}
    </div>
 </template>
 <script>
